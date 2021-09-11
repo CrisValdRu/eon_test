@@ -8,7 +8,7 @@ from rest_framework import serializers
 
 from acme.models import Usuario
 
-class UsuariaDetailSerializer(serializers.ModelSerializer):
+class UsuarioDetailSerializer(serializers.ModelSerializer):
     '''
     Serializa los elementos que se van a mostrar
     de producto.
