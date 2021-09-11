@@ -1,0 +1,18 @@
+- model: 'acme.Usuario'
+  pk: 1
+  fields:
+    nombre: 'Bugs'
+    apPaterno: 'Bunny'
+    username: 'bugs43'
+    password: 'Qu3_H4y_de_nu3v0_vi3jo?'
+    saldo: 13000.00
+
+- model: 'acme.Usuario'
+  pk: 2
+  fields:
+    nombre: 'Cesar Cristian'
+    apPaterno: 'Valdez'
+    apMaterno: 'Ruiz'
+    username: 'cesCris21'
+    password: '%c3sCr1s#'
+    saldo: 1500.00

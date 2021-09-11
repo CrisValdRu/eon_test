@@ -1,0 +1,14 @@
+- model: 'acme.Categoria_producto'
+  pk: 1
+  fields:
+    nombre: 'Abarrotes'
+
+- model: 'acme.Categoria_producto'
+  pk: 2
+  fields:
+    nombre: 'Farmacia'
+
+- model: 'acme.Categoria_producto'
+  pk: 3
+  fields:
+    nombre: 'Electronica'

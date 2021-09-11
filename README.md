@@ -133,9 +133,16 @@ Para instalar las dependencias debes ejecutar la siguiente instrucción
 	
 ## Configurar Django
 
-Una vez descargado los archivos del repositorio, para verificar que el proyecto funciona ejecutamos la siguiente instrucción
+Una vez descargado los archivos del repositorio, hay que modificar el archivo setings.py hubicado en el directorio pruebaEON/pruebaEON/setings.py 
+hay que agregar la direccion IP del equipo que corre el sisitema a la lista
+    
+    ...
+    ALLOWED_HOSTS = ['192.168.100.31', 'localhost', <nuevaIP>]
+    ...
 
-	python3 manage.py runserver
+Para verificar que el proyecto funciona ejecutamos la siguiente instrucción
+
+	python3 manage.py runserver <nuevaIP>:8080
 
 Esto va a levantar un servidor donde podemos verificar que el proyecto funciona. Debemos acceder a la siguiente liga [http://localhost:8000/](http://localhost:8000/) y nos deberá desplegar una página de inicio.
 

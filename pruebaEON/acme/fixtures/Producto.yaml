@@ -1,0 +1,80 @@
+- model: 'acme.Producto'
+  pk: 1
+  fields:
+    nombre: 'Refresco uva'
+    descripcion: 'Refresco de 500ml sabor uva.'
+    precio: 15.00
+    existencia: 10
+    categoria: 1
+
+- model: 'acme.Producto'
+  pk: 2
+  fields:
+    nombre: 'Lata de frijoles'
+    descripcion: 'Lata de frijoles bayos de 250 gr.'
+    precio: 8.50
+    existencia: 30
+    categoria: 1
+
+- model: 'acme.Producto'
+  pk: 3
+  fields:
+    nombre: 'Palomitas mantequilla'
+    descripcion: 'Palomitas de microndas sabor mantequilla.'
+    precio: 9.50
+    existencia: 27
+    categoria: 1
+
+- model: 'acme.Producto'
+  pk: 4
+  fields:
+    nombre: 'Paracetamol'
+    descripcion: 'Caja paracetamol de 500 gr.'
+    precio: 50.99
+    existencia: 100
+    categoria: 2
+
+- model: 'acme.Producto'
+  pk: 5
+  fields:
+    nombre: 'Alcohol'
+    descripcion: 'Botella de alcohol de 500 ml.'
+    precio: 11.00
+    existencia: 20
+    categoria: 2
+
+- model: 'acme.Producto'
+  pk: 6
+  fields:
+    nombre: 'Vitamina C'
+    descripcion: 'Caja de vitamina C de 200gr.'
+    precio: 120.00
+    existencia: 45
+    categoria: 2
+
+- model: 'acme.Producto'
+  pk: 7
+  fields:
+    nombre: 'Impresora'
+    descripcion: 'Impresora HP con escaner.'
+    precio: 1499.99
+    existencia: 10
+    categoria: 3
+
+- model: 'acme.Producto'
+  pk: 8
+  fields:
+    nombre: 'Monitor 27 pulgadas'
+    descripcion: 'Manitor de 27 pulgadas marca asus.'
+    precio: 4500.00
+    existencia: 20
+    categoria: 3
+
+- model: 'acme.Producto'
+  pk: 9
+  fields:
+    nombre: 'Audifonos Bluethoot'
+    descripcion: 'Audifonos bluethoot skull candy.'
+    precio: 780.00
+    existencia: 24
+    categoria: 3
