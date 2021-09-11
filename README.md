@@ -140,11 +140,18 @@ hay que agregar la direccion IP del equipo que corre el sisitema a la lista
     ALLOWED_HOSTS = ['192.168.100.31', 'localhost', <nuevaIP>]
     ...
 
-Para verificar que el proyecto funciona ejecutamos la siguiente instrucción
+Para verificar que el proyecto funciona ejecutamos la siguiente instrucción, para poder ejecutar este comando hay que hubicarnos en el directorio 
+eon_test/pruebaEON
 
 	python3 manage.py runserver <nuevaIP>:8080
 
-Esto va a levantar un servidor donde podemos verificar que el proyecto funciona. Debemos acceder a la siguiente liga [http://localhost:8000/](http://localhost:8000/) y nos deberá desplegar una página de inicio.
+Esto va a levantar un servidor donde podemos verificar que el proyecto funciona. Debemos acceder a la siguiente liga [http://<nuevaIP>:8000/](http://<nuevaIP>:8000/) y nos deberá desplegar una página de inicio.
+
+Ahora hay que crear las tablas a la base de datos y llenarla con los datos de los fxtures. Para ello hay que ejecutar los sigientes comandos
+
+    python3 manage.py makemigrations
+    python3 manage.py migrate
+    python3 manage.py loaddata /acme/fixtures/Categoria_producto.yaml /acme/fixtures/Producto.yaml /acme/fixtures/Usuario.yaml
 
 En caso de que se quiera crear un nuevo proyecto de Django hay que seguir los siguientes pasos.
 
