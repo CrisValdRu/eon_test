@@ -153,6 +153,8 @@ Ahora hay que crear las tablas a la base de datos y llenarla con los datos de lo
     python3 manage.py migrate
     python3 manage.py loaddata /acme/fixtures/Categoria_producto.yaml /acme/fixtures/Producto.yaml /acme/fixtures/Usuario.yaml
 
+Para acceder a la vista que muestra la documentacion de los endpoints hay que acceder a la siguiete liga [http://<nuevaIP>:8080/docs/](http://<nuevaIP>:8000/docs/)
+
 En caso de que se quiera crear un nuevo proyecto de Django hay que seguir los siguientes pasos.
 
 ## Crear proyectos
