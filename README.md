@@ -24,15 +24,15 @@ Cambiar la contraseña del usuario postgres (como superusuario) y acceder como �
 Ingresar a la consola de postgres (psql) y ejecutar las siguientes instrucciones
 
     psql
-    CREATE DATABASE <dbname>;
-    CREATE USER <dbuser> WITH PASSWORD '<dbpass>';
-    ALTER ROLE <dbuser> SET client_encoding TO 'utf8';
-    ALTER ROLE <dbuser> SET timezone TO 'UTC';
-    GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
+    CREATE DATABASE acme_db;
+    CREATE USER acme_admin WITH PASSWORD '4cm3-4dm1n';
+    ALTER ROLE acme_admin SET client_encoding TO 'utf8';
+    ALTER ROLE acme_admin SET timezone TO 'UTC';
+    GRANT ALL PRIVILEGES ON DATABASE acme_db TO acme_admin;
 
 Para permitir al usuario de la base de datos crear una base de datos de prueba desde django, es necesario ejecutar el siguiente programa
 
-    ALTER USER <userdb> CREATEDB;
+    ALTER USER acme_admin CREATEDB;
 
 
 # Django y DRF
@@ -94,26 +94,38 @@ Para poder crear nuestra aplicación en python lo primero es crear un nuevo dire
 	
 Posteriormente ejecutamos la siguiente instrucción que nos permitirá crear el entorno virtual para nuestro proyecto.
 
-	python3.8 -m venv <env_folder>
+	python3.8 -m venv venv
 
 
 Habilitamos el entorno virtual ejecutando las siguientes instrucciones
 
-    source <env_folder>/bin/activate
+    source venv/bin/activate
  O puedes ejecutar las siguiente instrucción
     
-	. <env_folder>/bin/activate
+	. venv/bin/activate
 
 En el directorio en el que nos encontramos creamos un nuevo archivo que lleva por nombre _requirements.txt_. Este archivo contiene todas las dependencias que se van a manejar para nuestro proyecto y se van a instalar para el entorno que creamos. Agregamos las siguientes líneas
 
-	Django==2.2.3 # Versión de Django
-	djangorestframework==3.9.4 # Versión de DRF
-	django-filter>=1.0.1 # Habilita el parsing de filtros en URL
-	psycopg2>=2.7 # Módulo para persistir los datos en la BD de PostgreSQL
-	django-cors-headers==3.0.2  # Módulo que habilita el Cross Origin Resource Sharing
-	coreapi #
-	drf-yasg # Para la generar la documentación de las API's
-	django-oauth-toolkit # Para soportar OAuth2 como mecanismo de Autenticación
+	Django==2.2.3
+    djangorestframework==3.10.3
+    markdown==3.1.1
+    django-filter==2.2.0
+    psycopg2
+    django-cors-headers==3.1.1
+    pyyaml==5.1.2
+    coreapi==2.3.3
+    drf-yasg==1.17.0
+    django-oauth-toolkit==1.2.0
+    pylint==2.4.2
+    pylint-django==2.0.11
+    packaging==19.2
+    pillow==6.2.1
+    django-extra-fields==1.2.4
+    pypdf2==1.26.0
+    celery==4.3.0
+    pika==1.1.0
+    django-celery-results==1.1.2
+    gunicorn==20.0.4
 
 Para instalar las dependencias debes ejecutar la siguiente instrucción
 
@@ -121,8 +133,13 @@ Para instalar las dependencias debes ejecutar la siguiente instrucción
 	
 ## Configurar Django
 
-AQUI VA LA CONFIGURACION DE DJANGO
+Una vez descargado los archivos del repositorio, para verificar que el proyecto funciona ejecutamos la siguiente instrucción
 
+	python3 manage.py runserver
+
+Esto va a levantar un servidor donde podemos verificar que el proyecto funciona. Debemos acceder a la siguiente liga [http://localhost:8000/](http://localhost:8000/) y nos deberá desplegar una página de inicio.
+
+En caso de que se quiera crear un nuevo proyecto de Django hay que seguir los siguientes pasos.
 
 ## Crear proyectos
 
