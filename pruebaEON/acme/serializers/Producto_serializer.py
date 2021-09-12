@@ -16,3 +16,15 @@ class ProductoDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
         fields = '__all__'
+    def create(self, validated_data):
+        try:
+            with transaction.atomic():
+                produto = Producto(**validated_data)
+                if produto.precio <= 0.50:
+                    raise serializers.ValidationError('El precio minimo es 0.50')
+                if produto.existencia < 1:
+                    raise serializers.ValidationError('La existencia minima es 1')
+                produto.save()
+        except ValidationError as exce:
+            raise serializers.ValidationError(exce.detail)
+        return produto
