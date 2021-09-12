@@ -110,7 +110,7 @@ En el directorio en el que nos encontramos creamos un nuevo archivo que lleva po
     djangorestframework==3.10.3
     markdown==3.1.1
     django-filter==2.2.0
-    psycopg2
+    psycopg2==2.8.6
     django-cors-headers==3.1.1
     pyyaml==5.1.2
     coreapi==2.3.3

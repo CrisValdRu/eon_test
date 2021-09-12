@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from acme.serializers import OperacionDetailSerializer
+from acme.serializers import OperacionCreateSerializer
 from acme.models import Usuario
 from acme.models import Producto
 from acme.models import Operacion
@@ -22,7 +23,6 @@ from ..utils.GenericsView import GetAllGeneric
 from ..utils.GenericsView import GetOneGeneric
 from ..utils.GenericsView import PostGeneric
 from ..utils.GenericsView import PutGeneric
-from ..utils.GenericsView import DeleteGeneric
 
 @method_decorator(
     name='get',
@@ -56,8 +56,8 @@ class Operacion_all_view(APIView, GetAllGeneric, PostGeneric):
     para registrar nuevas operaciones.
     '''
     def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return OperacionDetailSerializer
+        if self.request.method == 'POST':
+            return OperacionCreateSerializer
         return OperacionDetailSerializer
     def get_queryset(self):
         qs = Operacion.objects.all()
