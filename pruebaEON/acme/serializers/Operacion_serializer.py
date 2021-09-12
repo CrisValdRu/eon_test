@@ -8,6 +8,7 @@ from os import read, write
 from rest_framework import serializers
 
 from rest_framework.validators import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.db import transaction
 from datetime import datetime
@@ -18,6 +19,8 @@ from acme.models import Operacion
 
 from acme.utils.Constants import TIPO_OPERACION_COMPRA
 from acme.utils.Constants import TIPO_OPERACION_VENTA
+from acme.utils.Constants import TEXT_OPERACION_COMPRA
+from acme.utils.Constants import TEXT_OPERACION_VENTA
 
 class OperacionDetailSerializer(serializers.ModelSerializer):
     '''
@@ -45,22 +48,31 @@ class OperacionCreateSerializer(serializers.Serializer):
         data = {
             'id': obj.id,
             'fecha': obj.fecha,
-            'producto': obj.producto.id,
+            'producto_id': obj.producto.id,
+            'producto_existencias': obj.producto.existencia,
             'usuario_nombre': obj.usuario.nombre,
             'usuario_saldo': obj.usuario.saldo,
             'cantidad': obj.cantidad,
             'precio': obj.precio,
-            'tipo': TIPO_OPERACION_COMPRA if obj.tipo == 1 else TIPO_OPERACION_VENTA,
+            'tipo': TEXT_OPERACION_COMPRA if obj.tipo == TIPO_OPERACION_COMPRA else TEXT_OPERACION_VENTA,
         }
         return data
     def validate_compra(self, operacion: Operacion, producto: Producto, usuario: Usuario):
         is_valid = True
+        if operacion.cantidad <= 0:
+            is_valid = False
         if not producto.existencia - operacion.cantidad >= 0:
             is_valid = False
         if not usuario.saldo - operacion.precio >=0 :
             is_valid = False
         if not is_valid:
-            raise serializers.ValidationError('Sin existencias o saldo suficiente')
+            raise serializers.ValidationError('Sin existencias o saldo suficiente o cantidad menor a cero')
+    def validate_venta(self, operacion: Operacion, producto: Producto, usuario: Usuario):
+        is_valid = True
+        if operacion.cantidad <= 0:
+            is_valid = False
+        if not is_valid:
+            raise serializers.ValidationError('Cantidad menor a cero')
     def createCampra(self, operacion: Operacion):
         producto = Producto.objects.get(id=operacion.producto_id)
         usuario = Usuario.objects.get(id=operacion.usuario_id)
@@ -77,6 +89,7 @@ class OperacionCreateSerializer(serializers.Serializer):
         producto = Producto.objects.get(id=operacion.producto_id)
         usuario = Usuario.objects.get(id=operacion.usuario_id)
         operacion.precio = operacion.cantidad * producto.precio
+        self.validate_venta(operacion, producto, usuario)
         producto.existencia += operacion.cantidad
         usuario.saldo += operacion.precio
         operacion.usuario = usuario
@@ -87,7 +100,6 @@ class OperacionCreateSerializer(serializers.Serializer):
     def create(self, validated_data):
         try:
             with transaction.atomic():
-                #import pdb; pdb.set_trace()
                 producto = Producto.objects.get(
                     id=validated_data.pop('producto')
                 )
@@ -108,4 +120,7 @@ class OperacionCreateSerializer(serializers.Serializer):
                 
         except ValidationError as exce:
             raise serializers.ValidationError(exce.detail)
+        except ObjectDoesNotExist as ode:
+            raise serializers.ValidationError(ode)
+
         return operacion
